@@ -5,9 +5,10 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
+# include <stdlib.h>
+# include <errno.h>
+# include <string.h>
+# include <sys/wait.h>
 
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
@@ -16,4 +17,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 size_t	ft_strlen(const char *s);
 void free_splited(char ** cmd1 , char ** cmd2);
+void first_child (int * pipefd , char ** command1 , int fd);
+void second_child(int * pipefd, char ** command2, int fd);
 #endif 
