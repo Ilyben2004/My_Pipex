@@ -10,6 +10,16 @@
 # include <string.h>
 # include <sys/wait.h>
 
+typedef struct pipex_s {
+    int fd;
+    int fd2;
+    int pipefd[2];
+    char **command1;
+    char **command2;
+
+} pipex_t;
+
+
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
@@ -19,4 +29,9 @@ size_t	ft_strlen(const char *s);
 void free_splited(char ** cmd1 , char ** cmd2);
 void first_child (int * pipefd , char ** command1 , int fd);
 void second_child(int * pipefd, char ** command2, int fd);
+int     is_path(char * command);
+char	*ft_strnstr(const char *haystack, const char *needle , size_t len);
+char **extract_paths (char **envp);
+char *ft_check_command(char *command , char **envp);
+
 #endif 

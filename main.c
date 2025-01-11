@@ -3,14 +3,12 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <wait.h>
-int main(void)
-{ pid_t pid;
-pid = fork();
-if (pid == 0)
-{ printf("child\n");
-return (0);
-}
-wait(NULL);
-printf("parent\n");
-return 0;
+#include "pipex.h"
+
+int main( int argc, char *argv[], char *envp[] )
+{
+    char *check = ft_check_command("ldcdcdcs" , envp);
+    printf("%s" , check);
+    free(check);
+    return 0;
 }
