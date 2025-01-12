@@ -7,21 +7,6 @@ static void pipex_init(pipex_t *pipex_vars , char * argv[] , char *envp[] )
     pipex_vars-> command2 = ft_split(argv[3] , ' ');
     pipex_vars->command1[0] = ft_check_command(pipex_vars->command1[0] , envp);
     pipex_vars->command2[0] = ft_check_command(pipex_vars->command2[0] , envp);
-    if (access(argv[1] ,F_OK == -1))
-    {
-        printf("bash: %s: No such file or directory\n",argv[1]);
-        free(pipex_vars->command1[0]);
-        pipex_vars->command1[0] = NULL;
-    }
-    else
-    {
-        if (access(argv[1] ,R_OK == -1))
-        {
-            printf("permseeion denied %s \n",argv[1]);
-            pipex_vars->command1[0] = NULL;
-        }
-    }
-
     pipex_vars->fd = open(argv[1],O_RDONLY);
     unlink(argv[4]);
     pipex_vars->fd2 = open(argv[4],O_WRONLY | O_CREAT , 0666);
