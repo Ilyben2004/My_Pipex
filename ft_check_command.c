@@ -29,12 +29,16 @@ char *ft_check_command(char *command , char **envp)
         free(path);
         ret = access(file , X_OK);
         if (ret == 0)
+        {
+            free(command);
             return (ft_free(paths), file);
+        }
         free(file);
         i++;
     }
     ft_free(paths);
     printf("%s: command not found\n",command);
+    free(command);
  
     return (NULL);
 }

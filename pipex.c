@@ -11,12 +11,14 @@ static void pipex_init(pipex_t *pipex_vars , char * argv[] , char *envp[] )
     if (pipex_vars->fd == -1)
     {
         perror(argv[1]);
+        free(pipex_vars->command1[0]);
         pipex_vars->command1[0] = NULL;
     }
-    pipex_vars->fd2 = open(argv[4],O_WRONLY | O_CREAT , 0644);
+    pipex_vars->fd2 = open(argv[4],O_WRONLY | O_TRUNC | O_CREAT , 0644);
     if (pipex_vars->fd2 == -1)
     {
         perror(argv[4]);
+        free(pipex_vars->command2[0]);
         pipex_vars->command2[0] = NULL;
     }
     pipe(pipex_vars->pipefd);
@@ -40,11 +42,11 @@ int  main(int argc , char * argv[], char *envp[])
     
         if (!pipex_vars->command2[0])
             return (0);
-        wait(NULL);
         pid2 = fork();
         if (pid2 == 0 && pipex_vars->command2[0])
             second_child(pipex_vars->pipefd,pipex_vars->command2, pipex_vars->fd2);
     }
     free_splited(pipex_vars->command1,pipex_vars->command2);
+    free(pipex_vars);
     return 0;
 }

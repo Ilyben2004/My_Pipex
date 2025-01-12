@@ -8,7 +8,6 @@
 
 int main( int argc, char *argv[], char *envp[] )
 {
-    int fd = open("filen",O_WRONLY);
-    printf("%d",errno);
+    clean_file("file test");
     return 0;
 }

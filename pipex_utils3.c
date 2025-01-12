@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   pipex_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 15:09:21 by ibennaje          #+#    #+#             */
-/*   Updated: 2025/01/10 10:04:43 by ibennaje         ###   ########.fr       */
+/*   Created: 2024/11/06 15:33:39 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/01/12 10:58:38 by ibennaje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*substr;
+	int		higheroverlap;
 	size_t	i;
-	char	*ss;
 
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
-	if (ft_strlen(s + start) < len)
-		len = ft_strlen(s + start);
-	substr = malloc(len + 1);
-	if (!substr)
-		return (NULL);
-	ss = (char *)s;
 	i = 0;
-	while (i < len && ss[start])
+	if (!src && !dst)
+		return (NULL);
+	if (src == dst)
+		return ((void *) src);
+	higheroverlap = dst > src;
+	while (len > 0)
 	{
-		substr[i++] = ss[start++];
+		if (higheroverlap)
+			*((unsigned char *)dst + len - 1) = *((unsigned char *)src + len
+					- 1);
+		else
+		{
+			*((unsigned char *)dst + i) = *((unsigned char *)src + i);
+			i++;
+		}
+		len--;
 	}
-	substr[i] = '\0';
-	return (substr);
+	return (dst);
 }

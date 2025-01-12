@@ -6,10 +6,10 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <string.h>
 # include <sys/wait.h>
 
-typedef struct pipex_s {
+typedef struct pipex_s
+ {
     int fd;
     int fd2;
     int pipefd[2];
@@ -32,5 +32,6 @@ int     is_path(char * command);
 char	*ft_strnstr(const char *haystack, const char *needle , size_t len);
 char **extract_paths (char **envp);
 char *ft_check_command(char *command , char **envp);
+void clean_file (char *file);
 
 #endif 
