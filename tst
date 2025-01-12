@@ -17,9 +17,9 @@ drwxr-xr-x 3 ibennaje candidates   239 Jan  9 17:34 ft_printf
 -rw-r--r-- 1 ibennaje candidates   186 Jan 11 13:17 is_path.c
 drwxr-xr-x 3 ibennaje candidates  4096 Jan 10 09:54 libft
 -rw-r--r-- 1 ibennaje candidates   284 Jan 11 14:33 main.c
--rw-rw-rw- 1 ibennaje candidates     0 Jan 12 10:01 outfile
--rwxr-xr-x 1 ibennaje candidates 21664 Jan 12 09:55 pipex
--rw-r--r-- 1 ibennaje candidates  1450 Jan 12 09:47 pipex.c
--rw-r--r-- 1 ibennaje candidates   935 Jan 12 09:55 pipex.h
+-r--r--r-- 1 ibennaje candidates     4 Jan 12 09:41 outfile
+-rwxr-xr-x 1 ibennaje candidates 21704 Jan 12 09:39 pipex
+-rw-r--r-- 1 ibennaje candidates  1336 Jan 12 09:39 pipex.c
+-rw-r--r-- 1 ibennaje candidates   955 Jan 11 15:18 pipex.h
 -rw-r--r-- 1 ibennaje candidates   210 Jan 11 14:44 second_child.c
--rw-r--r-- 1 ibennaje candidates  1516 Jan 12 09:43 tst
+-rw-r--r-- 1 ibennaje candidates     0 Jan 12 09:43 tst

@@ -8,8 +8,17 @@ static void pipex_init(pipex_t *pipex_vars , char * argv[] , char *envp[] )
     pipex_vars->command1[0] = ft_check_command(pipex_vars->command1[0] , envp);
     pipex_vars->command2[0] = ft_check_command(pipex_vars->command2[0] , envp);
     pipex_vars->fd = open(argv[1],O_RDONLY);
-    unlink(argv[4]);
-    pipex_vars->fd2 = open(argv[4],O_WRONLY | O_CREAT , 0666);
+    if (pipex_vars->fd == -1)
+    {
+        perror(argv[1]);
+        pipex_vars->command1[0] = NULL;
+    }
+    pipex_vars->fd2 = open(argv[4],O_WRONLY | O_CREAT , 0644);
+    if (pipex_vars->fd2 == -1)
+    {
+        perror(argv[4]);
+        pipex_vars->command2[0] = NULL;
+    }
     pipe(pipex_vars->pipefd);
 }
 
@@ -33,7 +42,7 @@ int  main(int argc , char * argv[], char *envp[])
             return (0);
         wait(NULL);
         pid2 = fork();
-        if (pid2 == 0)
+        if (pid2 == 0 && pipex_vars->command2[0])
             second_child(pipex_vars->pipefd,pipex_vars->command2, pipex_vars->fd2);
     }
     free_splited(pipex_vars->command1,pipex_vars->command2);

@@ -4,11 +4,11 @@
 #include <sys/types.h>
 #include <wait.h>
 #include "pipex.h"
+#include <errno.h>
 
 int main( int argc, char *argv[], char *envp[] )
 {
-    char *check = ft_check_command("ldcdcdcs" , envp);
-    printf("%s" , check);
-    free(check);
+    int fd = open("filen",O_WRONLY);
+    printf("%d",errno);
     return 0;
 }
