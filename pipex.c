@@ -30,6 +30,8 @@ int  main(int argc , char * argv[], char *envp[])
     pid_t pid;
     pid_t pid2;
 
+    if (argc == 5)
+    {
     pipex_vars = malloc(sizeof(pipex_t));
     if(!pipex_vars)
         return (0);
@@ -48,5 +50,8 @@ int  main(int argc , char * argv[], char *envp[])
     }
     free_splited(pipex_vars->command1,pipex_vars->command2);
     free(pipex_vars);
-    return 0;
+    ft_wait(pid , pid2);
+    }
+ 
+    return (0);
 }
