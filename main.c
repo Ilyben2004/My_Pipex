@@ -5,15 +5,18 @@
 #include <wait.h>
 #include "pipex.h"
 #include <errno.h>
+# define RED "\033[31m"
+
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BOLD "\033[1m"
+# define RESET "\033[0m"
+
+
 
 int main( int argc, char *argv[], char *envp[] )
 {
-	int fd  = open ("infile",O_RDWR);
-	pid_t pid = fork();
-	char buffer[100];
-	dup2(fd,19);
-	close(19);
-	read (fd , buffer , 3);
-	printf("%s",buffer);
+	char *command[] = {"ls", ">", "outfile",NULL};
+	execve("/bin/ls",command,NULL);
 
 }

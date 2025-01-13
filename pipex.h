@@ -2,11 +2,13 @@
 
 #ifndef PIPEX_H
 # define PIPEX_H
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/wait.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <sys/wait.h>
+# include <stdint.h>
 
 typedef struct pipex_s
 {
@@ -31,7 +33,7 @@ int			is_path(char *command);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		**extract_paths(char **envp);
 char		*ft_check_command(char **command, char **envp);
-void		ft_wait(pid_t pid, pid_t pid2);
+int			ft_wait(pid_t pid, pid_t pid2);
 void		ft_father_close(pipex_t * pipex_vars);
 
 #endif

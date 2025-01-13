@@ -38,10 +38,17 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-void	ft_wait(int pid, int pid2)
+int	ft_wait(int pid, int pid2)
 {
-	waitpid(pid, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	int status;
+
+	waitpid (pid,NULL,0);
+	waitpid(pid2, &status, 0);
+	if (WIFEXITED(status))
+    	return (WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+    	return (WTERMSIG(status) + 128);
+	return (EXIT_FAILURE);
 }
 
 void		ft_father_close(pipex_t * pipex_vars)
