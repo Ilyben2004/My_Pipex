@@ -35,15 +35,7 @@ char **extract_paths (char **envp)
     return (NULL);
 }
 
-void first_child (int * pipefd, char ** command1, int fd)
-{
-    close(pipefd[0]);
-    dup2(fd,0);
-    dup2(pipefd[1],1);
-    execve(command1[0], command1 , NULL);
-    perror("");
-    exit (0);
-}
+
 
 int     is_path(char * command)
 {
@@ -56,6 +48,16 @@ int     is_path(char * command)
             return (1);
     }
     return (0);
+}
+
+void first_child (int * pipefd, char ** command1, int fd)
+{
+    close(pipefd[0]);
+    dup2(fd,0);
+    dup2(pipefd[1],1);
+    execve(command1[0], command1 , NULL);
+    perror("");
+    exit (0);
 }
 
 void second_child(int * pipefd, char ** command2, int fd2)
