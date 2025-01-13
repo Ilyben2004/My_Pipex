@@ -8,6 +8,12 @@
 
 int main( int argc, char *argv[], char *envp[] )
 {
-    clean_file("file test");
-    return 0;
+	int fd  = open ("infile",O_RDWR);
+	pid_t pid = fork();
+	char buffer[100];
+	dup2(fd,19);
+	close(19);
+	read (fd , buffer , 3);
+	printf("%s",buffer);
+
 }

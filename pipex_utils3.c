@@ -21,7 +21,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	if (!src && !dst)
 		return (NULL);
 	if (src == dst)
-		return ((void *) src);
+		return ((void *)src);
 	higheroverlap = dst > src;
 	while (len > 0)
 	{
@@ -36,4 +36,10 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		len--;
 	}
 	return (dst);
+}
+
+void	ft_wait(int pid, int pid2)
+{
+	waitpid(pid, NULL, 0);
+	waitpid(pid2, NULL, 0);
 }

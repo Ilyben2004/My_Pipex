@@ -1,0 +1,25 @@
+total 120
+-rwxrwxr-x 1 ibennaje ibennaje 16216 Jan 12 16:27 a.out
+-rw-rw-r-- 1 ibennaje ibennaje   201 Jan 12 16:02 free_splited.c
+-rw-rw-r-- 1 ibennaje ibennaje  1616 Jan 12 16:29 free_splited.o
+-rw-rw-r-- 1 ibennaje ibennaje   652 Jan 12 16:02 ft_check_command.c
+-rw-rw-r-- 1 ibennaje ibennaje  2464 Jan 12 16:29 ft_check_command.o
+drwxrwxr-x 2 ibennaje ibennaje  4096 Jan 12 13:08 ft_printf
+-rwxrwxr-x 1 ibennaje ibennaje  1917 Jan 12 16:02 ft_split.c
+-rw-rw-r-- 1 ibennaje ibennaje  2336 Jan 12 16:29 ft_split.o
+-rw-rw-r-- 1 ibennaje ibennaje    33 Jan 12 15:56 infile
+drwxrwxr-x 2 ibennaje ibennaje  4096 Jan 12 13:08 libft
+-rw-rw-r-- 1 ibennaje ibennaje   341 Jan 12 16:47 main.c
+-rw-rw-r-- 1 ibennaje ibennaje   317 Jan 12 16:38 Makefile
+-rw-rw-r-- 1 ibennaje ibennaje     0 Jan 12 16:50 mamad
+-rw-rw-r-- 1 ibennaje ibennaje     0 Jan 12 16:50 outfile
+-rwxrwxr-x 1 ibennaje ibennaje 21480 Jan 12 16:50 pipex
+-rw-rw-r-- 1 ibennaje ibennaje  1512 Jan 12 16:50 pipex.c
+-rw-rw-r-- 1 ibennaje ibennaje   936 Jan 12 16:02 pipex.h
+-rw-rw-r-- 1 ibennaje ibennaje  3176 Jan 12 16:50 pipex.o
+-rw-rw-r-- 1 ibennaje ibennaje   926 Jan 12 16:20 pipex_utils2.c
+-rw-rw-r-- 1 ibennaje ibennaje  3144 Jan 12 16:29 pipex_utils2.o
+-rwxrwxr-x 1 ibennaje ibennaje  1437 Jan 12 16:07 pipex_utils3.c
+-rw-rw-r-- 1 ibennaje ibennaje  1704 Jan 12 16:29 pipex_utils3.o
+-rw-rw-r-- 1 ibennaje ibennaje  1629 Jan 12 16:01 pipex_utils.c
+-rw-rw-r-- 1 ibennaje ibennaje  3128 Jan 12 16:29 pipex_utils.o

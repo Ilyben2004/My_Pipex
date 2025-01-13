@@ -1,6 +1,5 @@
 #include "pipex.h"
 
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
@@ -26,11 +25,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-char	*ft_strnstr(const char *haystack, const char *needle , size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
 	size_t	j;
-	
+
 	i = 0;
 	while (haystack[i] && i < len)
 	{
@@ -101,4 +100,3 @@ char	*ft_strdup(const char *s)
 	s2[i] = 0;
 	return (s2);
 }
-
