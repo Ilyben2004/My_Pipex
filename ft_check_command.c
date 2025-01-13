@@ -5,7 +5,7 @@ static void	ft_free(char **paths)
 	int	i;
 
 	i = 0;
-	while (paths[i])
+	while (paths && paths[i])
 		free(paths[i++]);
 	free(paths);
 }
@@ -15,30 +15,32 @@ char	*ft_check_command(char **command, char **envp)
 	char *path;
 	char *file;
 	char **paths;
-	int ret;
 
-	i = 0;
+	if (!envp || !*envp)
+		return (NULL);
 	if (is_path(*command))
 		return (*command);
+	i = -1;
 	paths = extract_paths(envp);
-	while (paths[i])
+	while (paths && paths[++i])
 	{
 		path = ft_strjoin(paths[i], "/");
 		file = ft_strjoin(path, *command);
 		free(path);
-		ret = access(file, X_OK);
-		if (ret == 0)
+		if (access(file, X_OK)== 0)
 		{
 			free(*command);
 			return (ft_free(paths), file);
 		}
 		free(file);
-		i++;
 	}
 	ft_free(paths);
-	printf("%s: command not found\n", *command);
+	if (paths)
+		printf("%s: command not found\n", *command);
+	else 
+		printf("%s: No such a file or a directory \n",*command);
 	i = 0;
-	while (command[i])
+	while (command && command[i])
 		free(command[i++]);
 	return (NULL);
 }
