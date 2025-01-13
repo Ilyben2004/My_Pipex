@@ -43,3 +43,11 @@ void	ft_wait(int pid, int pid2)
 	waitpid(pid, NULL, 0);
 	waitpid(pid2, NULL, 0);
 }
+
+void		ft_father_close(pipex_t * pipex_vars)
+{
+	close(pipex_vars->fd);
+	close(pipex_vars->fd2);
+	close(pipex_vars->pipefd[0]);
+	close(pipex_vars->pipefd[1]);
+}

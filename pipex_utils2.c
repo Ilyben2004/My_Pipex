@@ -54,8 +54,9 @@ void first_child (int * pipefd, char ** command1, int fd, char **envp)
         close(pipefd[0]);
         dup2(fd,0);
         dup2(pipefd[1],1);
-        execve(command1[0], command1 , envp);
-        perror("");
+		close(fd);
+		close(pipefd[1]);
+        execve(command1[0], command1 , envp);;
     }
     exit (0);
 }
@@ -67,8 +68,9 @@ void	second_child(int *pipefd, char **command2, int fd2 , char **envp)
     close(pipefd[1]);
 	dup2(fd2, 1);
 	dup2(pipefd[0], 0);
+	close(fd2);
+	close(pipefd[0]);
 	execve(command2[0], command2, envp);
-	perror("");
     }
 	exit(0);
 }

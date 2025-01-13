@@ -32,5 +32,6 @@ char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		**extract_paths(char **envp);
 char		*ft_check_command(char **command, char **envp);
 void		ft_wait(pid_t pid, pid_t pid2);
+void		ft_father_close(pipex_t * pipex_vars);
 
 #endif

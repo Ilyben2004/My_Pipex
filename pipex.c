@@ -9,7 +9,6 @@ static void	pipex_init(pipex_t *pipex_vars, char *argv[], char *envp[])
 	pipex_vars->command1 = ft_split(argv[2], ' ');
 	pipex_vars->command2 = ft_split(argv[3], ' ');
 	pipex_vars->fd = open(argv[1], O_RDONLY);
-	printf("the fd of the std/in is %d\n",pipex_vars->fd);
 	if (pipex_vars->fd == -1)
 	{
 		perror(argv[1]);
@@ -49,13 +48,13 @@ int	main(int argc, char *argv[], char *envp[])
 		if (pid == 0)
 			first_child(pipex_vars->pipefd, pipex_vars->command1,
 				pipex_vars->fd, envp);
-		else if (pid > 0)
-		{
-			pid2 = fork();
-			if (pid2 == 0)
-				second_child(pipex_vars->pipefd, pipex_vars->command2,
+		pid2 = fork();
+		if (pid2 == 0)
+			second_child(pipex_vars->pipefd, pipex_vars->command2,
 					pipex_vars->fd2 , envp);
-		}
+		ft_father_close(pipex_vars);
+		waitpid(pid,NULL,0);
+		waitpid(pid2,NULL,0);
 		free_splited(pipex_vars->command1, pipex_vars->command2);
 		free(pipex_vars);
 	}
