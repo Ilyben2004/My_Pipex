@@ -6,8 +6,8 @@ static void	pipex_init(pipex_t *pipex_vars, char *argv[], char *envp[])
 	int	i;
 
 	i = 0;
-	pipex_vars->command1 = ft_split(argv[2], ' ');
-	pipex_vars->command2 = ft_split(argv[3], ' ');
+	pipex_vars->command1 = ft_split(argv[2], " \t");
+	pipex_vars->command2 = ft_split(argv[3], " \t");
 	pipex_vars->fd = open(argv[1], O_RDONLY);
 	if (pipex_vars->fd == -1)
 	{
@@ -29,7 +29,6 @@ static void	pipex_init(pipex_t *pipex_vars, char *argv[], char *envp[])
 		pipex_vars->command2[0] = NULL;
 	}
 	pipe(pipex_vars->pipefd);
-	
 }
 
 int	main(int argc, char *argv[], char *envp[])

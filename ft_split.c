@@ -12,31 +12,46 @@
 
 #include "pipex.h"
 
-static size_t	count_words(char const *s, char c)
+
+static int check_char_is_sep(char c, char *sep)
+{
+	int i = 0;
+
+	while (sep[i])
+	{
+		if (sep[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static size_t	count_words(char const *s, char * c)
 {
 	size_t	nwords;
 
 	nwords = 0;
 	while (*s)
 	{
-		while (*s == c)
+		while (check_char_is_sep(*s , c))
 			s++;
-		if (*s != c && *s != '\0')
+		if (!check_char_is_sep(*s,c) && *s != '\0')
 		{
 			nwords++;
-			while (*s && *s != c)
+			while (*s && !check_char_is_sep(*s,c))
 				s++;
 		}
 	}
 	return (nwords);
 }
 
-static size_t	word_length(char const *word, char c)
+
+static size_t	word_length(char const *word, char * c)
 {
 	size_t	i;
 
 	i = 0;
-	while (word[i] && word[i] != c)
+	while (word[i] && !check_char_is_sep(word[i],c))
 		i++;
 	return (i);
 }
@@ -49,7 +64,7 @@ static void	*ft_free(char **forfree, size_t tozero)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *c)
 {
 	size_t	nwords;
 	size_t	wordlength;
@@ -65,7 +80,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	while (i < nwords)
 	{
-		while (*s == c)
+		while (check_char_is_sep(*s, c))
 			s++;
 		wordlength = word_length(s, c);
 		splited[i] = ft_substr(s, 0, wordlength);
