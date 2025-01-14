@@ -1,30 +1,52 @@
 #include "pipex.h"
 
-char	*ft_check_command(char **command, char **envp)
+static char	*check_paths(char **paths, char **command)
 {
 	int		i;
 	char	*path;
 	char	*file;
-	char	**paths;
 
-	if (is_path(*command))
-		return (*command);
 	i = -1;
-	paths = extract_paths(envp);
-	if (!paths)
-		return (printf(NOFILE, *command), NULL);
 	while (paths && paths[++i])
 	{
 		path = ft_strjoin(paths[i], "/");
 		file = ft_strjoin(path, *command);
 		free(path);
 		if (access(file, X_OK) == 0)
-		{
-			free(*command);
-			return (free_splited(paths, NULL), file);
-		}
+			return (file);
 		free(file);
 	}
-	printf(NOCOMMAND, *command);
-	return (free_splited(paths, command), NULL);
+	return (NULL);
+}
+
+static void	free_command(char **command)
+{
+	int	i;
+
+	i = 0;
+	while (command[i])
+		free(command[i++]);
+}
+
+char	*ft_check_command(char **command, char **envp)
+{
+	char	**paths;
+	char	*file;
+
+	if (!command)
+		return (NULL);
+	if (is_path(*command))
+		return (*command);
+	paths = extract_paths(envp);
+	if (!paths)
+		return (ft_put_two_strs(NOFILE, *command), NULL);
+	file = check_paths(paths, command);
+	if (file)
+	{
+		free(*command);
+		return (free_splited(&paths, NULL), file);
+	}
+	ft_put_two_strs(NOCOMMAND, *command);
+	free_command(command);
+	return (free_splited(&paths, NULL), NULL);
 }

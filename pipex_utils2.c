@@ -29,7 +29,7 @@ int	is_path(char *command)
 
 void	first_child(int *pipefd, char **command1, int fd, char **envp)
 {
-	if (command1[0])
+	if (command1 && command1[0])
 	{
 		close(pipefd[0]);
 		dup2(fd, 0);
@@ -44,7 +44,7 @@ void	first_child(int *pipefd, char **command1, int fd, char **envp)
 
 void	second_child(int *pipefd, char **command2, int fd2, char **envp)
 {
-	if (command2[0])
+	if (command2 && command2[0])
 	{
 		command2[0] = ft_check_command(command2, envp);
 		if (command2[0])
@@ -59,4 +59,10 @@ void	second_child(int *pipefd, char **command2, int fd2, char **envp)
 		}
 	}
 	exit(0);
+}
+
+void	free_struct(t_pipex *pipex)
+{
+	free_splited((&pipex->command1), &pipex->command2);
+	free(pipex);
 }

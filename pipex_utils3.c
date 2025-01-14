@@ -51,10 +51,44 @@ int	ft_wait(int pid, int pid2)
 	return (EXIT_FAILURE);
 }
 
-void	ft_father_close(pipex_t *pipex_vars)
+void	ft_father_close(t_pipex *pipex_vars)
 {
 	close(pipex_vars->fd);
 	close(pipex_vars->fd2);
 	close(pipex_vars->pipefd[0]);
 	close(pipex_vars->pipefd[1]);
+}
+
+void	ft_put_two_strs(char *str1, char *str2)
+{
+	write(1, str1, ft_strlen(str1));
+	write(1, str2, ft_strlen(str2));
+}
+
+void	free_splited(char ***cmd1, char ***cmd2)
+{
+	int	i;
+
+	if (cmd1 && *cmd1)
+	{
+		i = -1;
+		while ((*cmd1)[++i])
+		{
+			free((*cmd1)[i]);
+			(*cmd1)[i] = NULL;
+		}
+		free(*cmd1);
+		*cmd1 = NULL;
+	}
+	if (cmd2 && *cmd2)
+	{
+		i = -1;
+		while ((*cmd2)[++i])
+		{
+			free((*cmd2)[i]);
+			(*cmd2)[i] = NULL;
+		}
+		free(*cmd2);
+		*cmd2 = NULL;
+	}
 }
