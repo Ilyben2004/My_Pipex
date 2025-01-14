@@ -53,8 +53,10 @@ int	ft_wait(int pid, int pid2)
 
 void	ft_father_close(t_pipex *pipex_vars)
 {
-	close(pipex_vars->fd);
-	close(pipex_vars->fd2);
+	if (pipex_vars->fd != -1)
+		close(pipex_vars->fd);
+	if (pipex_vars->fd2 != -1)
+		close(pipex_vars->fd2);
 	close(pipex_vars->pipefd[0]);
 	close(pipex_vars->pipefd[1]);
 }

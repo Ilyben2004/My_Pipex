@@ -1,0 +1,16 @@
+//exit status : remember
+basic tests [ V ]
+infile not there [ V ]
+infile invalid permseions [ V ]
+outfile not there [X] exit status 
+outfile invalid permseions []
+infile invalid permseions && outfile invalid permseions []
+infile not there && outfile not there []
+infile invalid permseions && outfile not there []
+infile not there && outfile invalid permseions []
+unset path []
+stdin stdout random  [] 
+cat cat [] 
+vid arguments []
+sleep teste []
+
