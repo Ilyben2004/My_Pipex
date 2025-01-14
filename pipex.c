@@ -1,5 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 23:00:10 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/01/14 23:00:13 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
+static int args_checker(int argc , char *argv[])
+{
+	int i;
+	int valid;
+
+	valid = -1;
+	i = 1;
+	if (argc==5)
+	{
+		while (i < 5)
+		{
+			if (!(*argv[i]))
+				valid = -1;
+			i++;
+
+		}
+	
+	}
+	else
+		valid = -1;
+	if (valid == -1)
+		write(1,"please enter a valid arguments!",31);
+	return (valid);
+}
 static void	handle_open_fail(char *file, char **command)
 {
 	int	i;
@@ -20,15 +56,15 @@ static void	pipex_init(t_pipex *pipex_vars, char *argv[], char *envp[])
 	pipex_vars->command2 = ft_split(argv[3], " \t");
 	if (!pipex_vars->command1 || !pipex_vars->command2)
 		return ;
-	pipex_vars->fd2 = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0644);
-	if (pipex_vars->fd2 == -1)
-		handle_open_fail(argv[4], pipex_vars->command2);
 	pipex_vars->fd = open(argv[1], O_RDONLY);
 	if (pipex_vars->fd == -1)
 		handle_open_fail(argv[1], pipex_vars->command1);
 	else
 		pipex_vars->command1[0] = ft_check_command(&(pipex_vars->command1[0]),
 				envp);
+	pipex_vars->fd2 = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (pipex_vars->fd2 == -1)
+		handle_open_fail(argv[4], pipex_vars->command2);
 	if (pipe(pipex_vars->pipefd) == -1)
 		perror("Pipe fail");
 }
@@ -39,7 +75,7 @@ int	main(int argc, char *argv[], char *envp[])
 	pid_t	pid;
 	pid_t	pid2;
 
-	if (argc != 5)
+	if (args_checker(argc,argv) == -1)
 		return (0);
 	pipex_vars = malloc(sizeof(t_pipex));
 	if (!pipex_vars)

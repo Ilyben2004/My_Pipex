@@ -6,7 +6,7 @@
 /*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:33:39 by ibennaje          #+#    #+#             */
-/*   Updated: 2025/01/12 10:58:38 by ibennaje         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:00:47 by ibennaje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,9 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 int	ft_wait(int pid, int pid2)
 {
-	int	status;
-
 	waitpid(pid, NULL, 0);
-	waitpid(pid2, &status, 0);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
-		return (WTERMSIG(status) + 128);
-	return (EXIT_FAILURE);
+	waitpid(pid2, NULL, 0);
+	return (EXIT_SUCCESS);
 }
 
 void	ft_father_close(t_pipex *pipex_vars)
@@ -63,8 +57,8 @@ void	ft_father_close(t_pipex *pipex_vars)
 
 void	ft_put_two_strs(char *str1, char *str2)
 {
-	write(1, str1, ft_strlen(str1));
 	write(1, str2, ft_strlen(str2));
+	write(1, str1, ft_strlen(str1));
 }
 
 void	free_splited(char ***cmd1, char ***cmd2)
