@@ -2,17 +2,20 @@
 
 void	free_splited(char **cmd1, char **cmd2)
 {
-	int i;
+	int	i;
+
 	i = 0;
-	while (cmd1[i])
+	if (cmd1)
 	{
-		free(cmd1[i++]);
+		while (cmd1[i])
+			free(cmd1[i++]);
+		free(cmd1);
 	}
 	i = 0;
-	while (cmd2[i])
+	if (cmd2)
 	{
-		free(cmd2[i++]);
+		while (cmd2[i])
+			free(cmd2[i++]);
+		free(cmd2);
 	}
-	free(cmd1);
-	free(cmd2);
 }

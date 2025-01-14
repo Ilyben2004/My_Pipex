@@ -1,14 +1,15 @@
-
-
 #ifndef PIPEX_H
 # define PIPEX_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
 # include <errno.h>
-# include <sys/wait.h>
+# include <fcntl.h>
 # include <stdint.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <unistd.h>
+
+# define NOFILE "%s: No such a file or a directory \n"
+# define NOCOMMAND "%s: command not found\n"
 
 typedef struct pipex_s
 {
@@ -18,7 +19,7 @@ typedef struct pipex_s
 	char	**command1;
 	char	**command2;
 
-}			pipex_t;
+}			t_pipex;
 
 char		*ft_strjoin(char const *s1, char const *s2);
 char		**ft_split(char const *s, char *c);
@@ -34,6 +35,7 @@ char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		**extract_paths(char **envp);
 char		*ft_check_command(char **command, char **envp);
 int			ft_wait(pid_t pid, pid_t pid2);
-void		ft_father_close(pipex_t * pipex_vars);
+void		ft_father_close(pipex_t *pipex_vars);
+void		free_struct(pipex_t *pipex);
 
 #endif

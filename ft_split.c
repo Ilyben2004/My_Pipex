@@ -12,11 +12,11 @@
 
 #include "pipex.h"
 
-
-static int check_char_is_sep(char c, char *sep)
+static int	check_char_is_sep(char c, char *sep)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (sep[i])
 	{
 		if (sep[i] == c)
@@ -26,32 +26,31 @@ static int check_char_is_sep(char c, char *sep)
 	return (0);
 }
 
-static size_t	count_words(char const *s, char * c)
+static size_t	count_words(char const *s, char *c)
 {
 	size_t	nwords;
 
 	nwords = 0;
 	while (*s)
 	{
-		while (check_char_is_sep(*s , c))
+		while (check_char_is_sep(*s, c))
 			s++;
-		if (!check_char_is_sep(*s,c) && *s != '\0')
+		if (!check_char_is_sep(*s, c) && *s != '\0')
 		{
 			nwords++;
-			while (*s && !check_char_is_sep(*s,c))
+			while (*s && !check_char_is_sep(*s, c))
 				s++;
 		}
 	}
 	return (nwords);
 }
 
-
-static size_t	word_length(char const *word, char * c)
+static size_t	word_length(char const *word, char *c)
 {
 	size_t	i;
 
 	i = 0;
-	while (word[i] && !check_char_is_sep(word[i],c))
+	while (word[i] && !check_char_is_sep(word[i], c))
 		i++;
 	return (i);
 }
@@ -71,7 +70,7 @@ char	**ft_split(char const *s, char *c)
 	size_t	i;
 	char	**splited;
 
-	if (!s)
+	if (!s || *c)
 		return (NULL);
 	nwords = count_words(s, c);
 	splited = (char **)malloc((nwords + 1) * sizeof(char *));
